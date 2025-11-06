@@ -1,73 +1,184 @@
-# Welcome to your Lovable project
+# Zencuit Website
 
-## Project info
+Official website for **Zencuit Group** - Crafting AI-Enhanced Digital Solutions.
 
-**URL**: https://lovable.dev/projects/626256e1-1bf0-409a-98de-18dce39c1299
+## 🚀 About Zencuit
 
-## How can I edit this code?
+Zencuit is a technology company specializing in AI-enhanced web and mobile applications. We empower innovation through technology with our three specialized divisions:
 
-There are several ways of editing your application.
+- **Zencuit Knowledge** - Tech education and training
+- **Zencuit AI & Labs** - AI solutions and research
+- **Zencuit AutoTech** - Automotive technology integration
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/626256e1-1bf0-409a-98de-18dce39c1299) and start prompting.
+- 🎨 Modern, responsive design
+- 📱 Mobile-first approach
+- 🎠 Interactive project carousel
+- 📧 Contact form with email integration
+- 🌐 Social media integration
+- ⚡ Fast and optimized performance
+- 🎯 SEO-friendly structure
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Technologies Used
 
-**Use your preferred IDE**
+### Frontend
+- **React** - UI library
+- **TypeScript** - Type-safe development
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Re-usable component library
+- **Lucide React** - Icon library
+- **Embla Carousel** - Carousel functionality
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Backend (Email Server)
+- **Node.js** - Runtime environment
+- **Express** - Web framework
+- **Nodemailer** - Email sending
+- **CORS** - Cross-origin resource sharing
+- **dotenv** - Environment variable management
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📦 Installation
 
-Follow these steps:
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or bun package manager
+
+### Clone the Repository
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/Sandagomi/Zencuit.git
+cd Zencuit
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Install Frontend Dependencies
 
-# Step 3: Install the necessary dependencies.
-npm i
+```sh
+npm install
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Install Backend Dependencies
+
+```sh
+cd server
+npm install
+```
+
+## 🚀 Running the Project
+
+### Frontend Development Server
+
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The website will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Backend Email Server
 
-**Use GitHub Codespaces**
+1. Configure environment variables in `server/.env`:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```env
+EMAIL_USER=your-email@gmail.com
+EMAIL_APP_PASSWORD=your-16-character-app-password
+COMPANY_EMAIL=sandagomi@zencuit.com
+PORT=3001
+```
 
-## What technologies are used for this project?
+2. Start the server:
 
-This project is built with:
+```sh
+cd server
+npm start
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The backend will run on `http://localhost:3001`
 
-## How can I deploy this project?
+### Running Both Servers
 
-Simply open [Lovable](https://lovable.dev/projects/626256e1-1bf0-409a-98de-18dce39c1299) and click on Share -> Publish.
+You'll need two terminal windows:
 
-## Can I connect a custom domain to my Lovable project?
+**Terminal 1 - Frontend:**
+```sh
+npm run dev
+```
 
-Yes, you can!
+**Terminal 2 - Backend:**
+```sh
+cd server
+npm start
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📧 Email Setup
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+The contact form uses Gmail SMTP. To set this up:
+
+1. Enable 2-Step Verification on your Google account
+2. Generate an App Password at https://myaccount.google.com/apppasswords
+3. Add credentials to `server/.env` file
+
+See `server/README.md` for detailed email setup instructions.
+
+## 📁 Project Structure
+
+```
+├── src/
+│   ├── components/        # React components
+│   │   ├── Contact.tsx   # Contact form
+│   │   ├── Hero.tsx      # Hero section
+│   │   ├── Projects.tsx  # Projects carousel
+│   │   ├── Services.tsx  # Services section
+│   │   └── ...
+│   ├── assets/           # Images and static files
+│   ├── lib/              # Utility functions
+│   └── pages/            # Page components
+├── server/
+│   ├── index.js          # Express server
+│   ├── package.json      # Server dependencies
+│   └── README.md         # Server documentation
+├── public/               # Static assets
+└── package.json          # Frontend dependencies
+```
+
+## 🏗️ Building for Production
+
+```sh
+npm run build
+```
+
+The production-ready files will be in the `dist` directory.
+
+## 🌐 Deployment
+
+The website can be deployed to various platforms:
+
+- **Vercel** (Recommended for frontend)
+- **Netlify**
+- **GitHub Pages**
+- **AWS / Azure / Google Cloud**
+
+For the backend email server, consider:
+- **Heroku**
+- **Railway**
+- **Render**
+- **DigitalOcean**
+
+## 📝 License
+
+© 2025 Zencuit Group. All rights reserved.
+
+## 🤝 Contributing
+
+This is a private project for Zencuit Group. For inquiries, please contact us at sandagomi@zencuit.com
+
+## 📞 Contact
+
+- **Website:** Coming Soon
+- **Email:** sandagomi@zencuit.com
+- **Phone:** +94 766 15 7067
+- **LinkedIn:** [Zencuit](https://www.linkedin.com/company/zencuit/)
+- **Instagram:** [@zencuit_group](https://www.instagram.com/zencuit_group/)
+
+---
+
+**Designed for Purpose, Built for Excellence** ⚡
