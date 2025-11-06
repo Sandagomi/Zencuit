@@ -23,13 +23,13 @@ The server was only handling API routes (`/api/contact`, `/api/health`) but not 
 
 #### Build Settings
 
-**IMPORTANT**: Set **Root Directory** to blank/empty or just `.` (current directory)
+**IMPORTANT**: Set **Root Directory** to blank/empty (leave it completely empty)
 
-- **Root Directory**: ` ` (leave blank) or `.`
+- **Root Directory**: (leave blank/empty)
 
 - **Build Command**: 
   ```bash
-  npm install && npm run build && cd server && npm install
+  npm install && npm run build && cd server && npm install && cd ..
   ```
 
 - **Start Command**:
@@ -37,7 +37,10 @@ The server was only handling API routes (`/api/contact`, `/api/health`) but not 
   node server/index.js
   ```
   
-  Note: The dist folder will be created at /opt/render/project/src/dist during build
+  Note: 
+  - The dist folder will be created at ./dist during build
+  - Server dependencies are installed in ./server/node_modules
+  - Server runs from root directory and can access both dist and server/node_modules
 
 #### Environment Variables
 Make sure you have set the following environment variables in Render:
