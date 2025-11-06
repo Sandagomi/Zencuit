@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { existsSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +19,12 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React app (built files in dist folder)
-app.use(express.static(path.join(__dirname, '../dist')));
+// In production (Render), dist is copied to server/dist
+// In local dev, it's in ../dist
+const distPath = path.join(__dirname, 'dist');
+const distPathParent = path.join(__dirname, '../dist');
+const staticPath = existsSync(distPath) ? distPath : distPathParent;
+app.use(express.static(staticPath));
 
 // Create email transporter
 const transporter = nodemailer.createTransport({
@@ -114,10 +120,13 @@ app.get('/api/health', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
+  const indexPath = existsSync(path.join(__dirname, 'dist/index.html')) 
+    ? path.join(__dirname, 'dist/index.html')
+    : path.join(__dirname, '../dist/index.html');
+  res.sendFile(indexPath);
 });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`Serving static files from: ${path.join(__dirname, '../dist')}`);
+  console.log(`Serving static files from: ${staticPath}`);
 });

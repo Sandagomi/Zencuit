@@ -24,7 +24,7 @@ The server was only handling API routes (`/api/contact`, `/api/health`) but not 
 #### Build Settings
 - **Build Command**: 
   ```bash
-  npm install && npm run build && cd server && npm install
+  npm install && npm run build && cp -r dist server/ && cd server && npm install
   ```
 
 - **Start Command**:
