@@ -24,7 +24,7 @@ const Contact = () => {
     };
 
     try {
-      const response = await fetch('https://zencuit.onrender.com', {
+      const response = await fetch('https://zencuit.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
