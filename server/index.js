@@ -26,6 +26,7 @@ const possiblePaths = [
   path.join(__dirname, '../../dist'),              // ../../dist (if server is nested)
   path.resolve(__dirname, '../dist'),              // Absolute path to ../dist
   path.join(process.cwd(), 'dist'),                // ./dist (if running from root)
+  path.join(process.cwd(), '../dist'),             // ../dist from cwd
   '/opt/render/project/src/dist',                  // Render absolute path
 ];
 
@@ -47,6 +48,8 @@ if (!staticPath) {
   const fs = await import('fs');
   console.error('\nContents of __dirname:', fs.readdirSync(__dirname));
   console.error('Contents of parent dir:', fs.readdirSync(path.join(__dirname, '..')));
+  console.error('\nLooking for dist folder - it should have been created during build!');
+  console.error('Check if "npm run build" completed successfully in the Render build logs.');
   
   process.exit(1);
 }
