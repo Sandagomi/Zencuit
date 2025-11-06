@@ -21,25 +21,33 @@ app.use(express.json());
 // Serve static files from the React app (built files in dist folder)
 // Try multiple possible locations for the dist folder
 const possiblePaths = [
-  path.join(__dirname, 'dist'),           // server/dist (production on Render)
-  path.join(__dirname, '../dist'),        // ../dist (local development)
-  path.join(process.cwd(), 'dist'),       // ./dist (if running from root)
-  path.join(process.cwd(), 'server/dist') // ./server/dist (alternative)
+  path.join(__dirname, 'dist'),                    // server/dist (if copied)
+  path.join(__dirname, '../dist'),                 // ../dist (parent directory - local dev)
+  path.join(__dirname, '../../dist'),              // ../../dist (if server is nested)
+  path.resolve(__dirname, '../dist'),              // Absolute path to ../dist
+  path.join(process.cwd(), 'dist'),                // ./dist (if running from root)
+  '/opt/render/project/src/dist',                  // Render absolute path
 ];
 
 let staticPath;
 for (const p of possiblePaths) {
   if (existsSync(p)) {
     staticPath = p;
-    console.log(`Found dist folder at: ${p}`);
+    console.log(`✅ Found dist folder at: ${p}`);
     break;
   }
 }
 
 if (!staticPath) {
-  console.error('Could not find dist folder! Tried:', possiblePaths);
+  console.error('❌ Could not find dist folder! Tried:', possiblePaths);
   console.error('Current __dirname:', __dirname);
   console.error('Current process.cwd():', process.cwd());
+  
+  // List what's actually in these directories to help debug
+  const fs = await import('fs');
+  console.error('\nContents of __dirname:', fs.readdirSync(__dirname));
+  console.error('Contents of parent dir:', fs.readdirSync(path.join(__dirname, '..')));
+  
   process.exit(1);
 }
 
