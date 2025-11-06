@@ -19,11 +19,30 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React app (built files in dist folder)
-// In production (Render), dist is copied to server/dist
-// In local dev, it's in ../dist
-const distPath = path.join(__dirname, 'dist');
-const distPathParent = path.join(__dirname, '../dist');
-const staticPath = existsSync(distPath) ? distPath : distPathParent;
+// Try multiple possible locations for the dist folder
+const possiblePaths = [
+  path.join(__dirname, 'dist'),           // server/dist (production on Render)
+  path.join(__dirname, '../dist'),        // ../dist (local development)
+  path.join(process.cwd(), 'dist'),       // ./dist (if running from root)
+  path.join(process.cwd(), 'server/dist') // ./server/dist (alternative)
+];
+
+let staticPath;
+for (const p of possiblePaths) {
+  if (existsSync(p)) {
+    staticPath = p;
+    console.log(`Found dist folder at: ${p}`);
+    break;
+  }
+}
+
+if (!staticPath) {
+  console.error('Could not find dist folder! Tried:', possiblePaths);
+  console.error('Current __dirname:', __dirname);
+  console.error('Current process.cwd():', process.cwd());
+  process.exit(1);
+}
+
 app.use(express.static(staticPath));
 
 // Create email transporter
@@ -120,9 +139,11 @@ app.get('/api/health', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  const indexPath = existsSync(path.join(__dirname, 'dist/index.html')) 
-    ? path.join(__dirname, 'dist/index.html')
-    : path.join(__dirname, '../dist/index.html');
+  const indexPath = path.join(staticPath, 'index.html');
+  if (!existsSync(indexPath)) {
+    console.error(`index.html not found at: ${indexPath}`);
+    return res.status(404).send('Application files not found');
+  }
   res.sendFile(indexPath);
 });
 
