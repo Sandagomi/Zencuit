@@ -1,0 +1,24 @@
+# Exported from Render on 2026-01-08T12:22:21Z
+version: "1"
+projects:
+- name: Zencuit
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: Zencuit
+      runtime: node
+      repo: https://github.com/Sandagomi/Zencuit
+      plan: starter
+      envVars:
+      - key: COMPANY_EMAIL
+        sync: false
+      - key: EMAIL_APP_PASSWORD
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      region: oregon
+      buildCommand: npm install && npm run build && cd server && npm install && cd
+        ..
+      startCommand: node server/index.js
+      autoDeployTrigger: commit
